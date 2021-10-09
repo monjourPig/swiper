@@ -23,7 +23,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = 'kj-a&x_6of9k=5y5e@%q(qej))tk9(%(*(l*0u&8=ag@=db)am'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ['*']
 
@@ -118,3 +118,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.11/howto/static-files/
 
 STATIC_URL = '/static/'
+
+
+# 新添加
+# CELERY_BROKER_URL = 'amqp://guest:guest@localhost:5672//'

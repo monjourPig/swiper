@@ -2,8 +2,8 @@ from lib.http import render_json
 # from logic import send_verify_code
 from user.logic import send_verify_code
 
-# Create your views here.
 
+# Create your views here.
 
 
 def get_verify_code(request):
@@ -11,6 +11,7 @@ def get_verify_code(request):
     phonenum = request.POST.get('phonenum')
     send_verify_code(phonenum)
     return render_json(None, 0)
+
 
 def login(request):
     '''短信验证登录'''
