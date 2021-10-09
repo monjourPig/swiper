@@ -18,7 +18,8 @@ from django.contrib import admin
 from user import api as user_api
 
 urlpatterns = [
-    url(r'^api/verify_code', user_api.get_verify_code),
+    url(r'^api/user/verify', user_api.get_verify_code),  # 注册
+    url(r'^api/user/login', user_api.login),    # 登录
     url(r'^admin/', admin.site.urls),
 
 ]

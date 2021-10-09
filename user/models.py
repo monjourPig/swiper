@@ -1,6 +1,8 @@
 import datetime
 
 from django.db import models
+from django.utils.functional import cached_property
+from lib.orm import ModelMixin
 
 
 # Create your models here.
@@ -17,10 +19,10 @@ class User(models.Model):
     birth_year = models.IntegerField(default=2000)
     birth_month = models.IntegerField(default=1)
     birth_day = models.IntegerField(default=1)
-    avatar = models.CharField(max_length=256)
+    avatar = models.CharField(max_length=256)  # 头像
     location = models.CharField(max_length=32)
 
-    @property
+    @cached_property
     def age(self):
         today = datetime.date.today()
         birth_data = datetime.date(self.birth_year, self.birth_month, self.birth_day)
@@ -36,9 +38,21 @@ class User(models.Model):
             self._profile, _ = Profile.objects.get_or_create(id=self.id)
         return self._profile
 
+    # 将user对象转换成dict类型，方便将其转换成json传输
+    def to_dict(self):
+        return {
+            'id': self.id,
+            'nickname': self.nickname,
+            'phonenum': self.phonenum,
+            'sex': self.sex,
+            'avatar': self.avatar,
+            'location': self.location,
+            'age': self.age,
+        }
+
 
 # 用户设置类
-class Profile(models.Model):
+class Profile(models.Model, ModelMixin):
     ''' 用户配置项 '''
     SEX = (
         ('男', '男'),
