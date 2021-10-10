@@ -24,7 +24,6 @@ def send_verify_code(phonenum):
     sms_cfg['content'] = sms_cfg['content'] % vcode
     sms_cfg['mobile'] = phonenum
     response = requests.post(config.HY_SMS_URL, data=sms_cfg)
-    print(sms_cfg)
     return response
 
 
