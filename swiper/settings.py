@@ -43,7 +43,7 @@ MIDDLEWARE = [
     'django.middleware.common.CommonMiddleware',
     # 'django.middleware.csrf.CsrfViewMiddleware',  # ----------------
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'common.middleware.AuthMiddleware',
+    # 'common.middleware.AuthMiddleware',   # 验证登录中间件
 ]
 
 ROOT_URLCONF = 'swiper.urls'
@@ -117,3 +117,5 @@ STATIC_URL = '/static/'
 
 # 新添加
 # CELERY_BROKER_URL = 'amqp://guest:guest@localhost:5672//'
+
+MEDIA_ROOT = 'medias'

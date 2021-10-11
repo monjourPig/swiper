@@ -1,7 +1,9 @@
+
 from lib.http import render_json
 from common import error
-from user.logic import send_verify_code, check_vcode
+from user.logic import send_verify_code, check_vcode, save_upload_file
 from user.models import User
+from user.forms import ProfileForm
 
 
 # Create your views here.
@@ -37,9 +39,41 @@ def get_profile(request):
 
 def modify_profile(request):
     '''修改个人资料'''
-    pass
+    form = ProfileForm(request.POST)
+    # 检查数据是否正常
+    if form.is_valid():
+        user = request.user
+        # 清洗数据存放
+        user.profile.__dict__.update(form.cleaned_data)
+        user.profile.save()
+        return render_json(None)
+    else:
+        # 不正常返回错误码
+        return render_json(form.errors, error.PROFILE_ERROR)
 
 
 def upload_avatar(request):
     '''头像上传'''
-    pass
+    # 1.接收用户上传的图像
+    # 2.定义用户头像名称
+    # 3.异步将图像上传七牛
+    # 4.将URL保存入数据库
+
+    file = request.FILES.get('avatar')
+    if file:
+        save_upload_file(request.user, file)
+        return render_json(None)
+
+    else:
+        return render_json(None)
+
+
+
+
+
+
+
+
+
+
+

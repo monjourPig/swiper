@@ -58,7 +58,7 @@ class Profile(models.Model, ModelMixin):
         ('男', '男'),
         ('女', '女'),
     )
-
+    dating_sex = models.CharField(default='女', max_length=8, choices=SEX, verbose_name='匹配的性别')
     location = models.CharField(default='中国', max_length=32, verbose_name='目标城市')
 
     min_distance = models.IntegerField(default=1, verbose_name='最小查找范围')
@@ -67,7 +67,6 @@ class Profile(models.Model, ModelMixin):
     min_dating_age = models.IntegerField(default=18, verbose_name='最小交友年龄')
     max_dating_age = models.IntegerField(default=45, verbose_name='最大交友年龄')
 
-    dating_sex = models.CharField(default='女', max_length=8, choices=SEX, verbose_name='匹配的性别')
     vibration = models.BooleanField(default=True, verbose_name='是否开启震动')
     only_matche = models.BooleanField(default=True, verbose_name='不让匹配的人看我的相册')
     auto_play = models.BooleanField(default=True, verbose_name='是否自动播放视频')

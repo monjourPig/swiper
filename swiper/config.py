@@ -12,3 +12,12 @@ HY_SMS_PARAMS = {
     'mobile': None,
     'format': 'json',
 }
+
+
+# 七牛云配置
+QN_ACCESS_KEY = '_tgLsZO4emmBuDrWOsE-7_x8SJvrUryCKXln-WZ_'
+QN_SECRET_KEY = 'mQOJQWM-SUgrMs6PxQhcp2mEVJ1p_al5F21WVwrx'
+QN_BUCKET_NAME = 'monjour-swiper'
+QN_BASE_URL = 'http ://r0taefug3.hn-bkt.clouddn.com'
+
+
