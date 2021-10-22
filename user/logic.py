@@ -44,7 +44,7 @@ def save_upload_file(user, upload_file):
     # 1.接收用户上传的图像
     # 2.定义用户头像名称
     ext_name = os.path.splitext(upload_file.name)[-1]
-    filename = 'Avatar-%s%s' % (uid, ext_name)
+    filename = 'Avatar-%s%s' % (user.id, ext_name)
     filepath = os.path.join(settings.BASE_DIR, settings.MEDIA_ROOT, filename)
     with open(filepath, 'wb') as newfile:
         for chunk in upload_file.chunks():

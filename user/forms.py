@@ -4,6 +4,7 @@ from user.models import Profile
 
 class ProfileForm(forms.ModelForm):
     '''处理用户个人资料类'''
+
     # 具体指向某一个model
     class Meta:
         model = Profile
@@ -19,7 +20,6 @@ class ProfileForm(forms.ModelForm):
             'auto_play',
         ]
 
-
         # 清洗数据
         def clean_max_dating_age(self):
             cleaned_data = super().clean()
@@ -29,5 +29,4 @@ class ProfileForm(forms.ModelForm):
             if min_dating_age > max_dating_age:
                 # 注意，这个函数执行时如果抛出异常，不会接着匹配下面的字段
                 raise forms.ValidationError('min_dating_age > max_dating_age')
-
-
+            return max_dating_age

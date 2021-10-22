@@ -3,6 +3,7 @@ import datetime
 from django.db import models
 from django.utils.functional import cached_property
 from lib.orm import ModelMixin
+from vip.models import Vip
 
 
 # Create your models here.
@@ -22,6 +23,9 @@ class User(models.Model):
     avatar = models.CharField(max_length=256)  # 头像
     location = models.CharField(max_length=32)
 
+    # 添加vip关系字段
+    vip_id = models.IntegerField(default=1)
+
     @cached_property
     def age(self):
         today = datetime.date.today()
@@ -35,20 +39,28 @@ class User(models.Model):
     def profile(self):
         # 对象本身所有的属性都保存在self.__dict__中;      hasattr(self, 属性)，判断这个对象有没有某个属性
         if not hasattr(self, '_profile'):
-            self._profile, _ = Profile.objects.get_or_create(id=self.id)
+            self._profile, _ = Profile.objects.get_or_create(id=self.vip_id)
         return self._profile
 
-    # 将user对象转换成dict类型，方便将其转换成json传输
-    def to_dict(self):
-        return {
-            'id': self.id,
-            'nickname': self.nickname,
-            'phonenum': self.phonenum,
-            'sex': self.sex,
-            'avatar': self.avatar,
-            'location': self.location,
-            'age': self.age,
-        }
+    @property
+    def vip(self):
+        '''用户对应的vip'''
+        if not hasattr(self, '_vip'):
+            self._profile, _ = Vip.objects.get(id=self.vip_id)
+        return self._profile
+
+
+# 将user对象转换成dict类型，方便将其转换成json传输
+def to_dict(self):
+    return {
+        'id': self.id,
+        'nickname': self.nickname,
+        'phonenum': self.phonenum,
+        'sex': self.sex,
+        'avatar': self.avatar,
+        'location': self.location,
+        'age': self.age,
+    }
 
 
 # 用户设置类

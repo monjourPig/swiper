@@ -16,13 +16,20 @@ Including another URLconf
 from django.conf.urls import url
 from django.contrib import admin
 from user import api as user_api
+from social import api as social_api
 
 urlpatterns = [
     url(r'^api/user/verify$', user_api.get_verify_code),  # 注册
     url(r'^api/user/login$', user_api.login),    # 登录
     url(r'^api/user/profile$', user_api.get_profile),      # 获取个人资料
     url(r'^api/user/profile/modify$', user_api.modify_profile),     # 修改个人资料
-    url(r'^api/user/avatar/upload$', user_api.upload_avatar),
-    url(r'^admin/', admin.site.urls),
+    url(r'^api/user/avatar/upload$', user_api.upload_avatar),   # 用户上传头像
+    # social_api
+    url(r'^api/social/users', social_api.get_users),       # 获取推荐列表
+    url(r'^api/social/like', social_api.like),
+    url(r'^api/social/superlike', social_api.superlike),
+    url(r'^api/social/dislike', social_api.dislike),
+    url(r'^api/social/rewind', social_api.rewind),       # 反悔
+    url(r'^api/social/friends', social_api.friends),    # 查看好友列表
 
 ]
